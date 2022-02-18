@@ -1,0 +1,138 @@
+Cheaper to be lazy
+
+PART I
+
+* A bit about us
+- We work in the Software Engineering group at L3Harris Wescam
+- Our product consists of a gimbal-stabalized platform that carries an array of sensors (cameras, lasers, etc)
+- Most of our software targets multi-device embedded systems
+
+* The problem
+- Our systems are complex, dynamic, and many of the design details/decisions exist only in tribal knowledge
+- Our group has a grass-roots effort to preserve this knowledge in a variety of ways (formal software requirement documents, informal confluence pages, git commit messages, etc)
+- When it comes to documentation, we want to maximize time spent creating content and minimize time spent formatting and maintaining
+
+* Our solution
+- Write out documentation in a flexible mark-up/down for later export into a format of our choice (pdf, website, etc)
+
+* Claims
+    - Decoupling back-end documentation source code from the front-end user experience can provide us a lot of flexibility/scalability that is hard/impossible to achieve with a WYSIWYG approach
+    - Storing data in open-source formats free us from proprietary tools and ensures future extensibility/stability
+
+* Audience
+- Anyone who writes any kind of documentation (technical papers,  personal notes)
+- Proficient with a word processor
+- A very small amount of command line
+
+* Why use a text-based interface for document generation?
+
+Examples of WYSIWYG interfaces:
+- Microsoft Word/Visio/Powerpoint
+- Confluence
+
+- Matrix comparing text vs WYSIWYG
+| Text Based | WYSIWYG |
+|-
+| Free | Generally requires proprietary software |
+| Portable | Special SW may not run on certain OS |
+| Flexible Presentation Styles | Manual reformating required to insert into a different format (word -> powerpoint)|
+| Stable | Compatibility issues? |
+
+
+https://github.com/ReggieMarr/cheaper_to_be_lazy.git
+
+* Document Generation Flow Diagram
+
+* What is Mark-down?
+
+* Environment Setup
+** Supported platforms
+- Windows
+- Linux
+- MacOS (won't cover in this presentation)
+
+** Dependancies
+*** Mandatory
+- Pandoc
+- Text editor (Vim, vscode, emacs, notepad++, sublime)
+
+*** Optional
+- Hugo (for static site generation)
+- For PDF generation MikTex (windows) TeX Live (Linux)
+
+** Demo
+*** Create your document
+*** Export to PDF
+*** Export to Static Website
+
+* Interim Q & A
+
+Part II
+
+* Get some additional nice-to-have features with a Mark-up Lanaguge
+
+** Why a text based interface
+
+    * Decoupling of the content vs the formatting.
+
+    - By utilizing well defined/standardized  markup languages (like org and markdown) more powerful and deterministic formatting can be used.
+
+    - What is a markup language (hint you already use them)
+
+    - show examples from md -> org -> latex
+
+    * Efficiencies in editing, reviewing, and generating content.
+
+    - Generating content relates to literate programming/software enabled content generation
+
+    - Editing/review relates to leveraging text editiing/vim keybindings
+
+
+** Major/Minor Points
+Make the point about decoupling content and formatting (giving reason why we want to use a text editor vs a word processor)
+Make the point about markdown languages (giving reason as to why we want a text editor with syntax support rather than just notepad or notepad++)
+Make the point about efficiencies in editing and reviewing text (highlighting why in much the same way that its valuable to use a markup syntax for formatting its also valuable to use a language for keybindings (i.e. vim))
+Make the point about literate programming and why md vs org, briefly highlighting code blocks in each.
+
+
+** Synopsis
+*** Part I
+1. Background on why a text based interface
+2. Markdown examples.
+3. PDF generation.
+4. Static website generation
+
+Interim Q & A
+
+*** Part II
+An expansion of part I. When you have a markup language you get these extra things like:
+- Folding.
+- Aligned Tables (Brief formula example).
+- Tagging.
+- Interoperability with other tools (i.e. agenda).
+- Markup files can be masters overseeing sub files.
+-
+1. Latex (why and how its used)) -> inserting symbols and formulas in word
+2. Org syntax
+Rich Contents - https://orgmode.org/manual/Markup-for-Rich-Contents.html
+
+3. Code blocks (in org)
+
+    - Show brief python example with the weather today
+
+    - Show generating table
+
+    - Plantuml
+
+4. Literate Programming
+
+Final Q & A
+
+
+* Formats we will export to
+- PDF
+- Word?
+- Self-contained HTML?
+- Statically generated website
+- Reveal.js
+-
