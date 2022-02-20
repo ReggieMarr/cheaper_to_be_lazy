@@ -1,19 +1,38 @@
 #+TITLE: Reg
 #+AUTHOR: Reginald Marr
 
+* Glossary of terms
+- [[https://en.wikipedia.org/wiki/Markup_language][Markup (Language)]] ::
+    A family of languages used to facilate formatting for document generation.
+- [[https://en.wikipedia.org/wiki/Text_editor][Text Editor]] ::
+  A type of program used to manipulate text.
+- Git/Version Control ::
+  Git is a version control application which provides analysis on differences within a project defined primarily as a collection of text files.
+  Changes/Additions to the project can be isolated by unique units of work as "commits".
+  These commits can be applied as patches or contained as branches.
+- Modal Text Editing ::
+  A form of text editing which seperates insertion and searching/reviewing/editing of text.
+- [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]]  ::
+  A form of programming which relies on natural language punctutated by software specific syntax to describe how a program should operate.
 * Part I
 * Part II :literate_programming:
 An expansion of part I. When you have a markup language you get these extra things like:
 *** Latex (why and how its used)) -> inserting symbols and formulas in word
 *** Org syntax :org:
+Org is a markup language primarily associated with Emacs.
+It shares many features with markdown with a few bonuses such as;
+- Execution of code blocks
+- Tags
+- Custom Properties
+- Folding
+- Links
+  - Files
+  - Websites
+  - Git links
+***** Examples
 Rich Contents - https://orgmode.org/manual/Markup-for-Rich-Contents.html
 
-***** Examples :examples:
-
-****** Meta examples.
 - =org-store-link= and =org-insert-link=
-- folding
-- tagging
 - spellcheck
 ****** [[file:~/.emacs.d/.local/straight/repos/org/doc/org-guide.org::*Tables][Tables]]
 | Department | Budget | Size (People) | Spending per person |
@@ -24,11 +43,11 @@ Rich Contents - https://orgmode.org/manual/Markup-for-Rich-Contents.html
 #+TBLFM: $4=$2/$3
 ****** Properties.
 ****** Markup files can be masters overseeing sub files.
-*** Code blocks (in org)
+****** Code blocks (in org)
 Code blocks are implemented in a number of markup languages, typically to provide context around software specific documentation.
 While org provides this it also includes the ability to execute said code blocks which can be leveraged to generate content.
 
-**** Temperature Data Example
+******* Temperature Data Example
 The following example will utilize [[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-python.html][Python code blocks]] to perform some simple analysis on some temperature data.
 
 This bit of code doesn't do much but provides a means for retrieving the data in a format we can work with.
@@ -122,8 +141,15 @@ print(f"[[file:{image_filename}]]")
 #+RESULTS: plot_temperature_data
 [[file:temp_series.png]]
 
+#+name: test
+#+begin_src python :results output
+import os
+print(os.path)
+#+end_src
 
-**** Sequence Diagram Example
+#+RESULTS: test
+
+******* Sequence Diagram Example
 #+NAME: org_to_ppx
 #+HEADER: :file org_to_ppx.png
 #+BEGIN_SRC plantuml :results drawer :tangle org_to_ppx_sd.puml
@@ -146,4 +172,3 @@ Bob -> Alice : Yet another authentication Request
 Bob <- Alice : Yet another authentication Response
 #+END_SRC
 
-*** Literate Programming

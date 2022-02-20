@@ -1,0 +1,94 @@
+#+TITLE: Env_setup
+
+* Overview
+
+An intrisinc part of document generation using a text based interface is the tools utilized to create said documentation.
+This document is meant to provide a general guide for getting a beginners and advanced setup with all the neccessary prerequisites.
+
+** Linux
+*** Base Packages
+**** Git
+Most Linux distributions will come with git pre-installed.
+If this is not the case it can be installed using the following commands:
+- Ubuntu/Debian ::
+  #+begin_src sh
+    sudo apt update && sudo apt install git -y
+  #+end_src
+- Manjaro/Arch ::
+  #+begin_src sh
+    sudo pacman -Syu && sudo pacman -S git
+  #+end_src
+**** Python
+Python is packaged on most systems. Utilizing anaconda can be useful for easy env and package management.
+The guide to install is [[https://docs.anaconda.com/anaconda/install/linux/][found online here.]]
+The following python packages are also required (install using =pip= or =conda=).
+***** Pandas
+***** Numpy
+***** Plotly
+**** Pandoc
+- Ubuntu/Debian ::
+  #+begin_src sh
+    sudo install pandoc
+  #+end_src
+- Manjaro/Arch ::
+  #+begin_src sh
+    sudo pacman -S pandoc
+  #+end_src
+**** Hugo
+Information on installing hugo is provided [[https://gohugo.io/getting-started/installing/][here]].
+
+*** Editor setup
+**** Vscode (beginner-friendly)
+VSCode is a beginner friendly text editor with community and corporate support (from Microsoft).
+Installation of vscode is described [[https://code.visualstudio.com/docs/setup/linux][here]].
+The following keybindings are recommended to provide a minimal setup to follow along with.
+- vscodevim ::
+  A vim emulator which provides a modal text editing experience and key bindings based on the viml key language.
+- vscode-python ::
+  An extension which provides syntax highlighting and autocompletion.
+- org-mode ::
+  An extension which provides syntax highlighting, autocompletion and rendering compatible with the org markup language.
+- vscode-markdown ::
+  An extension which provides syntax highlighting, autocompletion and rendering compatible with the markdown markup language.
+**** Doom-Emacs (advanced)
+Emacs is a highly extensible/customizable lisp interpreter primarily utilized as a text editor.
+While the "Vanilla" installation of emacs provides minimal user friendly plugins collections of plugins are provided as distributions. One of the most popular (and recommended) is a distributions known as doom emacs.
+To install it is recommended to follow the [[https://github.com/hlissner/doom-emacs/blob/master/docs/getting_started.org#on-linux][getting started guide]] to install emacs itself and the required dependencies.
+To install the distribution =git clone= the repo and utilize the [[https://github.com/hlissner/doom-emacs#install][install script]].
+
+** Windows
+
+*** Base Packages
+**** Git
+Git is a version controlling command line application useful for maintaining releases of text based content.
+The installation guide can be found [[https://git-scm.com/book/en/v2/Getting-Started-Installing-Git][here.]]
+**** Python
+Python is packaged on most systems. Utilizing anaconda can be useful for easy env and package management.
+The guide to install is [[https://docs.anaconda.com/anaconda/install/windows/][found online here.]]
+The following python packages are also required (install using =pip= or =conda=).
+***** Pandas
+***** Numpy
+***** Plotly
+**** Pandoc
+Pandoc is used to convert between a variety of documentation formats. It can be installed for free by following the guide and downloading the install executable [[https://pandoc.org/installing.html][found here.]]
+**** Hugou
+Information on installing hugo is provided [[https://gohugo.io/getting-started/installing/][here]].
+
+*** Editor setup
+**** Vscode (beginner-friendly)
+VSCode is a beginner friendly text editor with community and corporate support (from Microsoft).
+Installation of vscode is described [[https://code.visualstudio.com/docs/setup/windows][here.]]
+The following keybindings are recommended to provide a minimal setup to follow along with.
+- vscodevim ::
+  A vim emulator which provides a modal text editing experience and key bindings based on the viml key language.
+- vscode-python ::
+  An extension which provides syntax highlighting and autocompletion.
+- org-mode ::
+  An extension which provides syntax highlighting, autocompletion and rendering compatible with the org markup language.
+- vscode-markdown ::
+  An extension which provides syntax highlighting, autocompletion and rendering compatible with the markdown markup language.
+**** Doom-Emacs (advanced)
+Emacs is a highly extensible/customizable lisp interpreter primarily utilized as a text editor.
+While the "Vanilla" installation of emacs provides minimal user friendly plugins collections of plugins are provided as distributions. One of the most popular (and recommended) is a distributions known as doom emacs.
+To install it is recommended to follow the [[https://github.com/hlissner/doom-emacs/blob/master/docs/getting_started.org#on-windows][getting started guide]] to install emacs itself and the required dependencies.
+To install the distribution =git clone= the repo and utilize the [[https://github.com/hlissner/doom-emacs#install][install script]].
