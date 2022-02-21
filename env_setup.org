@@ -21,10 +21,17 @@ If this is not the case it can be installed using the following commands:
 **** Python
 Python is packaged on most systems. Utilizing anaconda can be useful for easy env and package management.
 The guide to install is [[https://docs.anaconda.com/anaconda/install/linux/][found online here.]]
-The following python packages are also required (install using =pip= or =conda=).
-***** Pandas
-***** Numpy
-***** Plotly
+The following python packages are also required.
+- Pandas
+- Numpy
+- Plotly
+- Plotly-Orca
+Using anaconda these can be installed =conda install=
+#+begin_src sh
+conda install numpy
+conda install plotly
+conda install -c plotly plotly-orca
+#+end_src
 **** Pandoc
 - Ubuntu/Debian ::
   #+begin_src sh
@@ -65,13 +72,20 @@ The installation guide can be found [[https://git-scm.com/book/en/v2/Getting-Sta
 **** Python
 Python is packaged on most systems. Utilizing anaconda can be useful for easy env and package management.
 The guide to install is [[https://docs.anaconda.com/anaconda/install/windows/][found online here.]]
-The following python packages are also required (install using =pip= or =conda=).
-***** Pandas
-***** Numpy
-***** Plotly
+The following python packages are also required.
+- Pandas
+- Numpy
+- Plotly
+- Plotly-Orca
+Using anaconda these can be installed =conda install=
+#+begin_src sh
+conda install numpy
+conda install plotly
+conda install -c plotly plotly-orca
+#+end_src
 **** Pandoc
 Pandoc is used to convert between a variety of documentation formats. It can be installed for free by following the guide and downloading the install executable [[https://pandoc.org/installing.html][found here.]]
-**** Hugou
+**** Hugo
 Information on installing hugo is provided [[https://gohugo.io/getting-started/installing/][here]].
 
 *** Editor setup
@@ -92,3 +106,38 @@ Emacs is a highly extensible/customizable lisp interpreter primarily utilized as
 While the "Vanilla" installation of emacs provides minimal user friendly plugins collections of plugins are provided as distributions. One of the most popular (and recommended) is a distributions known as doom emacs.
 To install it is recommended to follow the [[https://github.com/hlissner/doom-emacs/blob/master/docs/getting_started.org#on-windows][getting started guide]] to install emacs itself and the required dependencies.
 To install the distribution =git clone= the repo and utilize the [[https://github.com/hlissner/doom-emacs#install][install script]].
+
+***** Custom configuration
+
+****** Env Vars and PATH
+Note if installing by downloading executables and using =git bash= it is critical that environment variables and paths are set properly.
+
+In windows go to Control Panel -> User Accounts -> User Accounts -> Change my environment variables.
+
+Edit/Create the =Path= environment variable such that it looks like this (where "reggi" is your =USERNAME=)
+
+[[file:env_vars.png][file:~/Downloads/cheaper_to_be_lazy/env_vars.png]]
+
+Edit/Create the =HOME= environment variable such that it looks like this (where "reggi" is your =USERNAME=)
+
+[[file:home_var.png][file:~/Downloads/cheaper_to_be_lazy/home_var.png]]
+
+If using anaconda the following may be useful when added to the =~/.doom.d/config.el=
+#+begin_src emacs-lisp
+
+(add-to-list 'exec-path (format "c:/Users/%s/anaconda3/" (getenv "USERNAME")))
+(add-to-list 'exec-path (format "c:/Users/%s/anaconda3/Library" (getenv "USERNAME")))
+(add-to-list 'exec-path (format "c:/Users/%s/anaconda3/Library/bin" (getenv "USERNAME")))
+(add-to-list 'exec-path (format "c:/Users/%s/anaconda3/Library/mingw-w64/bin/" (getenv "USERNAME")))
+(add-to-list 'exec-path (format "c:/Users/%s/anaconda3/condabin/" (getenv "USERNAME")))
+(add-to-list 'exec-path (format "c:/Users/%s/anaconda3/Scripts/" (getenv "USERNAME")))
+(setq org-babel-python-command (format "/c/Users/%s/anaconda3/python.exe" (getenv "USERNAME")))
+
+#+end_src
+
+This ensures that the path to =fd= and =ripgrep= are set proper.
+
+#+begin_src emacs-lisp
+(add-to-list 'exec-path (format "c:/Users/%s/Downloads/fd-v8.3.2-x86_64-pc-windows-msvc:" (getenv "USERNAME")))
+(add-to-list 'exec-path (format "c:/Users/%s/Downloads/ripgrep-13.0.0-x86_64-pc-windows-msvc/ripgrep-13.0.0-x86_64-pc-windows-msvc/" (getenv "USERNAME")))
+#+end_src
