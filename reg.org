@@ -1,5 +1,142 @@
-#+TITLE: Reg
-#+AUTHOR: Reginald Marr
+#+title: It's cheaper to be lazy
+#+subtitle: Automate your document generation without spending a dime nor your time
+#+author: Eric Dyer, Reginald Marr
+
+#+SETUPFILE: /home/edyer/dark_helmet/ox/latex.setup
+
+* Introduction
+** A Bit About Us
+- We work in the Software Engineering group at L3Harris Wescam
+- Design gimbal-stabilized platforms that carry an array of sensors (cameras, lasers, etc) for air, land, and marine applications
+- Most of our software targets multi-device embedded systems
+
+** The Problem
+- Our systems are complex, dynamic, and many of the design details/decisions exist only in tribal knowledge
+- Our group has a grass-roots effort to preserve this knowledge in a variety of ways (formal software requirement documents, informal confluence pages, git commit messages, etc)
+- Must maximize time spent creating content and minimize effort to format and maintain
+- Eliminating frictions encourages our team to keep documentation up-to-date
+
+** Our Solution
+- Write content in a flexible mark-up/down language
+- Use a dedicated export/formatting software to convert content into format of our choice (pdf, powerpoint, website, etc)
+
+** Claims
+- Decoupling back-end documentation source code from the front-end user experience can provide us a lot of flexibility/scalability that is hard/impossible to achieve with a WYSIWYG approach
+- Storing data in open-source formats free us from proprietary tools and ensures future extensibility/stability
+
+** Audience
+- Anyone who writes docs (user guides, technical manuals, personal notes)
+- Proficiency with a word processor and a linux or windows based environment
+- A very small amount of command line
+
+** Outline
+- Part I: Learn how to write content in *markdown* for easy export into pdf, powerpoint, and static website formats
+- Part II: Demo the benefits of extending markdown content with a small amount of mark-up syntax to allow for even more advanced/powerful workflows
+
+** TODO Why use a text-based interface for document generation?
+- Matrix comparing text vs WYSIWYG
+
+* Part I
+** What is Markdown?
+- A simple mark-up language for creating formatted text in a plain-text editor
+- Syntax designed to be more human-readable compared to other mark-up languages (xml, html, etc)
+
+** Basic Markdown syntax
+#+begin_src markdown
+# A Pound Sets a Level 1 Heading
+## Two Pounds Set a Level 2 Heading
+### Subsequent Pounds Set More Deeply Nested Headings
+
+*Sandwich a phrase in 1 asterisk to italicize*
+**Sandwich a phrase in 2 asterisks to bold**
+
+> Block quotes can be make by prepending with a right angle bracket
+
+1. Ordered
+2. Lists
+3. Are
+4. Supported
+
+- Un-ordered
+- Lists
+  + Are
+  + Supported
+    - As
+    - Well
+
+You can create a horizontal rule with 3 or more underscores
+___
+
+[Links text can be enclosed in square brackets](https://address-to-website.com)
+
+![Images follow a similar syntax](./document-generation-flow-diagram.png "document generation")
+#+end_src
+
+** Document Generation Flow Diagram
+[[file:document-generation-flow-diagram.png]]
+
+** Environment Setup
+*** Supported platforms
+- Linux
+- Windows
+- MacOS
+
+Our tutorial has been tested on linux & windows, although everything should be portable to MacOS as well
+
+*** Installation
+**** Dependancies
+| Tool            | Description                                   | Requirement        |
+|-----------------+-----------------------------------------------+--------------------|
+| Pandoc          | Conversion between markup and various formats | Required           |
+| Text Editor     | Sublime Text, vscode, notepad++, emacs, vim   | Required           |
+| MikTex/TeX Live | Latex used as intermediate format for pdfs    | For PDFs           |
+| Hugo            | Static site generator                         | For static website |
+
+**** Windows Intallation Guide
+***** Pandoc
+***** Text Editor
+****** VSCode
+****** Emacs
+****** Sublime
+***** MikTex
+***** Hugo
+
+**** Linux Intallation Guide
+***** Pandoc
+***** Text Editor
+****** VSCode
+****** Emacs
+****** Sublime
+***** MikTex
+***** Hugo
+** Export to Powerpoint
+1. Start a terminal or navigate to the =/part_1/1_powerpoint directory=
+2. This directory contains the raw content =content.md= as well as a template powerpoint file, =template.pptx=, used to format the content for the correct letterhead. There is also a =.png= file that the markdown will include in the presentation.
+3. Execute pandoc with the following command
+   #+begin_src bash
+   pandoc content.md -o content.pptx --reference-doc template.pptx
+   #+end_src
+   - Here we specify =content.md= as the source file for our content
+   - The =-o= flag tells pandoc we'd like to convert this source file to another output file - in this case, a powerpoint file called =content.pptx=. We can give this file any name we like
+   - The =--reference-doc= flag allows use to provide a powerpoint template used to style the document according to company requirements
+4. =content.pptx= should now be created in the same directory as the rest of these files. Open the newly generated file in powerpoint to see the results!
+
+** Export to PDF
+1. Pandoc provides multiple ways to export your content to PDF. The default is using LaTeX, a high-quality typesetting system, as an intermediate. Refer to the installation guide to get LaTex up and running on your system
+2. Start a terminal or navigate to the =/part_1/2_pdf directory=
+3. This directory contains the raw content =content.md= as well as the LaTex template, =template.latex=, used to format the content for the correct letterhead. There is also a =.png= file to included in the document and a =L3HarrisLogo.jpg= that will be included in the header of each page.
+4. Execute pandoc with the following command
+   #+begin_src bash
+   pandoc content.md -o content.pdf --template template.latex
+   #+end_src
+   - Here we specify =content.md= as the source file for our content
+   - The =-o= flag tells pandoc we'd like to convert this source file to another output file - in this case, a pdf file called =content.pdf=. We can give this file any name we like
+   - The =--template= flag allows us to provide a latex template used to style the document according to company requirements. This incluedes a nice title page as well as a header and footer.
+5. =content.pdf= should now be created in the same directory as the rest of these files. Open the newly generated file in powerpoint to see the results!
+
+** Export to html
+
+** Interim Q & A
 
 * Glossary of terms
 - [[https://en.wikipedia.org/wiki/Markup_language][Markup (Language)]] ::
@@ -14,7 +151,6 @@
   A form of text editing which seperates insertion and searching/reviewing/editing of text.
 - [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]]  ::
   A form of programming which relies on natural language punctutated by software specific syntax to describe how a program should operate.
-* Part I
 * Part II :literate_programming:
 An expansion of part I. When you have a markup language you get these extra things like:
 *** Latex (why and how its used)) -> inserting symbols and formulas in word
