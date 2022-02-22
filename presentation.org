@@ -1,0 +1,341 @@
+#+title: It's cheaper to be lazy
+#+subtitle: Automate your document generation without spending a dime nor your time
+#+author: Eric Dyer, Reginald Marr
+
+#+SETUPFILE: /home/edyer/dark_helmet/ox/latex.setup
+
+* Introduction
+** A Bit About Us
+- We work in the Software Engineering group at L3Harris Wescam
+- Design gimbal-stabilized platforms that carry an array of sensors (cameras, lasers, etc) for air, land, and marine applications
+- Most of our software targets multi-device embedded systems
+
+** The Problem
+- Our systems are complex, dynamic, and many of the design details/decisions exist only in tribal knowledge
+- Our group has a grass-roots effort to preserve this knowledge in a variety of ways (formal software requirement documents, informal confluence pages, git commit messages, etc)
+- Must maximize time spent creating content and minimize effort to format and maintain
+- Eliminating frictions encourages our team to keep documentation up-to-date
+
+** Our Solution
+- Write content in a flexible mark-up/down language
+- Use a dedicated export/formatting software to convert content into format of our choice (pdf, powerpoint, website, etc)
+
+** Claims
+- Decoupling back-end documentation source code from the front-end user experience can provide us a lot of flexibility/scalability that is hard/impossible to achieve with a WYSIWYG approach
+- Storing data in open-source formats free us from proprietary tools and ensures future extensibility/stability
+
+** Audience
+- Anyone who writes docs (user guides, technical manuals, personal notes)
+- Proficiency with a word processor and a linux or windows based environment
+- A very small amount of command line
+
+** Outline
+- Part I: Learn how to write content in *markdown* for easy export into pdf, powerpoint, and static website formats
+- Part II: Demo the benefits of extending markdown content with a small amount of mark-up syntax to allow for even more advanced/powerful workflows
+
+** TODO Why use a text-based interface for document generation?
+- Matrix comparing text vs WYSIWYG
+
+* Part I
+** What is Markdown?
+- A simple mark-up language for creating formatted text in a plain-text editor
+- Syntax designed to be more human-readable compared to other mark-up languages (xml, html, etc)
+
+** Basic Markdown syntax
+#+begin_src markdown
+# A Pound Sets a Level 1 Heading
+## Two Pounds Set a Level 2 Heading
+### Subsequent Pounds Set More Deeply Nested Headings
+
+*Sandwich a phrase in 1 asterisk to italicize*
+**Sandwich a phrase in 2 asterisks to bold**
+
+> Block quotes can be make by prepending with a right angle bracket
+
+1. Ordered
+2. Lists
+3. Are
+4. Supported
+
+- Un-ordered
+- Lists
+  + Are
+  + Supported
+    - As
+    - Well
+
+You can create a horizontal rule with 3 or more underscores
+___
+
+[Links text can be enclosed in square brackets](https://address-to-website.com)
+
+![Images follow a similar syntax](./document-generation-flow-diagram.png "document generation")
+#+end_src
+
+** Document Generation Flow Diagram
+[[file:document-generation-flow-diagram.png]]
+
+** Environment Setup
+*** Supported platforms
+- Linux
+- Windows
+- MacOS
+
+Our tutorial has been tested on linux & windows, although everything should be portable to MacOS as well
+
+*** Installation
+**** Dependancies
+| Tool            | Description                                   | Requirement        |
+|-----------------+-----------------------------------------------+--------------------|
+| Pandoc          | Conversion between markup and various formats | Required           |
+| Text Editor     | Sublime Text, vscode, notepad++, emacs, vim   | Required           |
+| MikTex/TeX Live | Latex used as intermediate format for pdfs    | For PDFs           |
+| Hugo            | Static site generator                         | For static website |
+
+**** Windows Intallation Guide
+***** Pandoc
+***** Text Editor
+****** VSCode
+****** Emacs
+****** Sublime
+***** MikTex
+***** Hugo
+
+**** Linux Intallation Guide
+***** Pandoc
+***** Text Editor
+****** VSCode
+****** Emacs
+****** Sublime
+***** MikTex
+***** Hugo
+** Export to Powerpoint
+1. Start a terminal or navigate to the =/part_1/1_powerpoint directory=
+2. This directory contains the raw content =content.md= as well as a template powerpoint file, =template.pptx=, used to format the content for the correct letterhead. There is also a =.png= file that the markdown will include in the presentation.
+3. Execute pandoc with the following command
+   #+begin_src bash
+   pandoc content.md -o content.pptx --reference-doc template.pptx
+   #+end_src
+   - Here we specify =content.md= as the source file for our content
+   - The =-o= flag tells pandoc we'd like to convert this source file to another output file - in this case, a powerpoint file called =content.pptx=. We can give this file any name we like
+   - The =--reference-doc= flag allows use to provide a powerpoint template used to style the document according to company requirements
+4. =content.pptx= should now be created in the same directory as the rest of these files. Open the newly generated file in powerpoint to see the results!
+
+** Export to PDF
+1. Pandoc provides multiple ways to export your content to PDF. The default is using LaTeX, a high-quality typesetting system, as an intermediate. Refer to the installation guide to get LaTex up and running on your system
+2. Start a terminal or navigate to the =/part_1/2_pdf directory=
+3. This directory contains the raw content =content.md= as well as the LaTex template, =template.latex=, used to format the content for the correct letterhead. There is also a =.png= file to included in the document and a =L3HarrisLogo.jpg= that will be included in the header of each page.
+4. Execute pandoc with the following command
+   #+begin_src bash
+   pandoc content.md -o content.pdf --template template.latex
+   #+end_src
+   - Here we specify =content.md= as the source file for our content
+   - The =-o= flag tells pandoc we'd like to convert this source file to another output file - in this case, a pdf file called =content.pdf=. We can give this file any name we like
+   - The =--template= flag allows us to provide a latex template used to style the document according to company requirements. This incluedes a nice title page as well as a header and footer.
+5. =content.pdf= should now be created in the same directory as the rest of these files. Open the newly generated file in powerpoint to see the results!
+
+** Export to html
+
+** Interim Q & A
+
+* Glossary of terms
+- [[https://en.wikipedia.org/wiki/Markup_language][Markup (Language)]] ::
+    A family of languages used to facilate formatting for document generation.
+- [[https://en.wikipedia.org/wiki/Text_editor][Text Editor]] ::
+  A type of program used to manipulate text.
+- Git/Version Control ::
+  Git is a version control application which provides analysis on differences within a project defined primarily as a collection of text files.
+  Changes/Additions to the project can be isolated by unique units of work as "commits".
+  These commits can be applied as patches or contained as branches.
+- Modal Text Editing ::
+  A form of text editing which seperates insertion and searching/reviewing/editing of text.
+- [[https://en.wikipedia.org/wiki/Literate_programming][Literate Programming]]  ::
+  A form of programming which relies on natural language punctutated by software specific syntax to describe how a program should operate.
+* Part II :literate_programming:
+An expansion of part I. When you have a markup language you get these extra things like:
+*** Org syntax :org:
+Org is a markup language primarily associated with Emacs.
+It shares many features with markdown with a few bonuses such as;
+- Execution of code blocks
+- Tags
+- Custom Properties
+- Folding
+- Links
+  - Files
+  - Websites
+  - Git links (orgit)
+***** Examples
+Rich Contents - https://orgmode.org/manual/Markup-for-Rich-Contents.html
+
+- =org-store-link= and =org-insert-link=
+ [[file:temp_series.png][file:~/Projects/repos/cheaper_to_be_lazy/temp_series.png]]
+- spellcheck
+****** [[file:~/.emacs.d/.local/straight/repos/org/doc/org-guide.org::*Tables][Tables]]
+******* live Example
+| Shopping item | Cost |
+|---------------+------|
+| bannas        | $6   |
+******* Premade Example
+| Department | Budget | Size (People) | Spending per person |
+|------------+--------+---------------+---------------------|
+| Software   | 100000 |            80 |                1250 |
+| Electrical | 130000 |            30 |           4333.3333 |
+| Systems    |  50000 |            25 |                2000 |
+| Mechanical | 250000 |            25 |               10000 |
+|------------+--------+---------------+---------------------|
+| Total      | 530000 |           160 |           17583.333 |
+#+TBLFM: $4=$2/$3::@>$2..$4=vsum(@2..@-1)
+****** Code blocks (in org)
+Code blocks are implemented in a number of markup languages, typically to provide context around software specific documentation.
+While org provides this it also includes the ability to execute said code blocks which can be leveraged to generate content.
+
+******* Temperature Data Example
+The following example will utilize [[https://orgmode.org/worg/org-contrib/babel/languages/ob-doc-python.html][Python code blocks]] to perform some simple analysis on some temperature data.
+
+******** Retrieving data with Python & Pandas
+The following is some example code which retrieves data from some csv into a pandas dataframe.
+
+The syntax of this code block might appear more complex than a markdown but its accomplishing a similar goal; Upon export recognize this content as code and apply language specific syntax highlighting.
+
+#+name: read_csv_header
+#+begin_src python :exports code
+# we'll import pandas to do some simple data manipulation
+import pandas as pd
+
+# read the previously downloaded data and store as a data series
+datafilename = "en_climate_hourly_ON_6153193_02-2022_P1H"
+df = pd.read_csv(f"./{datafilename}.csv")
+temp_series = df['Temp (°C)']
+#+end_src
+
+#+RESULTS: read_csv_header
+: None
+
+Now that we have some code block describing how we retrieved some data we might also want to display a summary of said data.
+In this case we'll use a code block in a way distinct from how one might typically use code blocks in markdown or other markup languages; /as executables/.
+
+#+name: print_data_frame
+#+begin_src python :noweb yes :exports result :results output
+<<read_csv_header>>
+
+print(df)
+#+end_src
+
+Note the syntax =:noweb yes= and =<<read_csv_header>>=. This uses [[https://orgmode.org/manual/Noweb-Reference-Syntax.html][noweb]] which allows referencing of previous code blocks from within code blocks.
+
+The following content is generated by a code block which is part of the document but which itself not exported into the final document. This is indicated by the syntax =:exports results=.
+
+Finally the =:results output= syntax indicates that upon execution of this code block we want to render that which is piped to =stdout=.
+
+#+RESULTS: print_data_frame
+#+begin_example
+     Longitude (x)  Latitude (y)  ... Wind Chill Flag        Weather
+0           -79.94         43.17  ...             NaN            NaN
+1           -79.94         43.17  ...             NaN          Clear
+2           -79.94         43.17  ...             NaN            NaN
+3           -79.94         43.17  ...             NaN            NaN
+4           -79.94         43.17  ...             NaN  Mostly Cloudy
+..             ...           ...  ...             ...            ...
+667         -79.94         43.17  ...             NaN            NaN
+668         -79.94         43.17  ...             NaN            NaN
+669         -79.94         43.17  ...             NaN            NaN
+670         -79.94         43.17  ...             NaN            NaN
+671         -79.94         43.17  ...             NaN            NaN
+
+[672 rows x 30 columns]
+#+end_example
+
+******** Pipe parsed data into raw org
+Sometimes it can be useful to generate content with formatting which is conditional on the content itself.
+To accomplish this we use the syntax =:results output raw= to indicate that we would like to render the output of some code block as raw org.
+
+#+name: read_csv
+#+begin_src python :noweb strip-export :export both :results output raw
+<<read_csv_header>>
+
+print(f"- {datafilename} Custom Summary ::")
+print("\t#+TBLNAME: data_table")
+print("\t| Location | Temp (Min °C) | Temp (Max °C) | Temp (Mean °C) |")
+print("\t|-+-+-|")
+print(f"\t | Hamilton | {temp_series.min()} | {temp_series.max()} | {temp_series.mean()}|")
+#+end_src
+
+#+RESULTS: read_csv
+- ./en_climate_hourly_ON_6153193_02-2022_P1H.csv Custom Summary ::
+	#+TBLNAME: data_table
+	| Location | Temp (Min °C) | Temp (Max °C) |     Temp (Mean °C) |
+	|----------+---------------+---------------+--------------------|
+	| Hamilton |         -17.6 |           8.5 | -4.354656862745095 |
+
+Going further still we can reference tables in our code blocks when some further analysis is needed.
+Note the code block syntax =:var tbl=data_table= references the =TBLNAME=.
+#+name: read_table
+#+begin_src python :export both :results output :var tbl=data_table
+print(f"Middle val is {(tbl[0][1] + tbl[0][2])/2}")
+#+end_src
+
+Since code blocks support a variety of languages one usecase for this might be a code block which generates some test data which is referenced later by a code block which itself is testing some code (possibly also written in a code block).
+
+******** Generate interactive and non-interactive plots with Plotly
+In some cases it may be useful to provide a visual representation of some processed data set.
+By using code blocks we can leverage [[https://plotly.com/][plotly]] to generate a variety of static and interactive plots of some dataset.
+
+This code block takes our dataset and produces both an interactive and static plot. We can then conditionally utlize either depending on how we are presenting/exporting our document.
+#+name: plot_temperature_data
+#+begin_src python :noweb strip-export :results output raw :exports both :tangle plot_temp.py
+<<read_csv_header>>
+
+import plotly
+import plotly.express as px
+
+image_filename = "temp_series"
+
+fig = px.line(df, x=list(df.index), y=temp_series)
+fig.update_layout(xaxis_title="Hamilton Hourly Temp", yaxis_title="Degrees C")
+# fig.write_image(f"{image_filename}.png")
+plotly.offline.plot( fig, filename=f"{image_filename}.html", image_filename=image_filename,
+                     image='png', auto_open=False)
+
+print(f"[[file:{image_filename}]]")
+#+end_src
+
+#+RESULTS: plot_temperature_data
+[[file:temp_series]]
+
+#+name: test
+#+begin_src python :results output
+import os
+print(os.path)
+#+end_src
+
+#+RESULTS: test
+
+******* Sequence Diagram Example
+plantuml is a language used to describe uml diagrams which can then be rendered.
+This is natively supported by org-mode & emacs.
+#+NAME: org_to_ppx
+#+HEADER: :file org_to_ppx.png
+#+BEGIN_SRC plantuml :results drawer :tangle org_to_ppx_sd.puml
+autonumber 10 10 "<b>[000]"
+Bob -> Alice : Authentication Request
+Bob <- Alice : Authentication Response
+
+autonumber stop
+Bob -> Alice : dummy
+
+autonumber resume "<font color=red><b>Message 0  "
+Bob -> Alice : Yet another authentication Request
+Bob <- Alice : Yet another authentication Response
+
+autonumber stop
+Bob -> Alice : dummy
+
+autonumber resume 1 "<font color=blue><b>Message 0  "
+Bob -> Alice : Yet another authentication Request
+Bob <- Alice : Yet another authentication Response
+#+END_SRC
+
+#+RESULTS: org_to_ppx
+:results:
+[[file:org_to_ppx.png]]
+:end:
